@@ -1,0 +1,12 @@
+@megamenu-icons-admin__font-name-path: '@{baseDir}fonts/MegaMenu/icomoon';
+@megamenu-icons-admin__font-name : 'MegaMenu';
+.font-face(
+@family-name:@megamenu-icons-admin__font-name,
+@font-path: @megamenu-icons-admin__font-name-path,
+@font-weight: normal,
+@font-style: normal
+);
+.admin__menu .item-menu > a:before {
+  font-family: @megamenu-icons-admin__font-name;
+  content: "\e800";
+}

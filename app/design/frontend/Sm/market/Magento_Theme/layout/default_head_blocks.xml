@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- ADD JQUERY -->
+		<meta name="x_ua_compatible" content="IE=edge"/>
+        <script src="js/jquery-2.1.4.min.js"/>		
+		<script src="js/bootstrap/bootstrap.min.js"/>
+		<script src="js/owl.carousel.js"/>
+		<script src="js/jquery.fancybox.pack.js"/>
+		<script src="js/easyResponsiveTabs.js"/>
+		<script src="js/yttheme.js"/>
+        <!-- ADD CSS  -->
+		
+        <css src="css/styles-m.css" />
+        <css src="css/styles-l.css" media="screen and (min-width: 768px)"/>
+        <css src="css/print.css" media="print" />		
+		<css src="css/css-fix.css" />
+		<css src="css/yttheme.css" />
+    </head>	
+	<body>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Js\Components" name="head.components" as="components" template="Magento_Theme::js/components.phtml" before="-"/>
+        </referenceContainer>
+    </body>
+</page>

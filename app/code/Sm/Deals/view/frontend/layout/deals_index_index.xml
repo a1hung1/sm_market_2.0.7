@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<title>Sm Deals</title>
+		<!-- <css src="Sm_Deals::css/deals.css" media="all" />
+		<css src="Sm_Deals::css/owl.carousel.css" media="all" />
+		<script src="jquery.js" data-requiremodule="jquery" />
+		<script src="Sm_Deals::js/owl.carousel.js" defer="defer" async="" data-requirecontext="jquery" data-requiremodule="Sm_Deals::js/owl.carousel" /> -->
+	</head>
+	<body>
+		<!--<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>-->
+		<referenceContainer name="content">
+			<block class="Sm\Deals\Block\Deals" name="deals" template="Sm_Deals::default.phtml" />
+		</referenceContainer>
+	</body>
+</page>
