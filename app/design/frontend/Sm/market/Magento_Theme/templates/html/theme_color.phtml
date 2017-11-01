@@ -1,0 +1,181 @@
+<?php
+$_config = $this->helper('Sm\Market\Helper\Data');
+$color  = $_config->getGeneral('theme_color');
+
+if($color == 'yellow'){
+	$theme_color = '#f4a137';
+}
+
+if($color == 'blue'){
+	$theme_color = '#00abf0';
+}
+
+if($color == 'green'){
+	$theme_color = '#3ab54a';
+}
+
+if($color == 'emerald'){
+	$theme_color = '#009975';
+}
+
+if($color == 'tangerine'){
+	$theme_color = '#e34931';
+}
+
+if($color == 'custom'){
+	$theme_color = $_config->getGeneral('custom_color_theme');
+}
+
+$img_path = $block->getViewFileUrl('images') . '/' . $color . '/';
+
+?>
+
+<style>
+
+/* COLOR */
+.copyright-footer a,
+.block-minicart .minicart-items .product-item-details .product-item-name a:hover,
+.top-search ul li a:hover,
+.sm-listing-tabs .ltabs-tabs-container .ltabs-tabs li.tab-sel,
+.sm-listing-tabs .ltabs-tabs-container .ltabs-tabs li:hover,
+.sm-listing-tabs .owl-controls .owl-nav div:hover,
+.related-wrapper .owl-controls .owl-nav div:hover,
+.upsell-wrapper .owl-controls .owl-nav div:hover,
+.resp-vtabs .resp-tabs-list li.resp-tab-active,
+.collections .collect a:hover,
+.clients-say .block-content-clients-say .owl-controls .owl-nav div:hover,
+.more-w .more-view:hover,
+.resp-vtabs .resp-tabs-list li:hover{
+	color: <?php echo $theme_color;?>;
+}
+
+.header-style-2 .header-bottom .searchbox-header .search-wrapper .block-content .btn-search-header,
+.header-style-3 .header-bottom .searchbox-header .search-wrapper .block-content .btn-search-header{
+	color: <?php echo $theme_color;?>!important;
+}
+
+/* BACKGROUND COLOR */
+.owl-controls .owl-nav div:hover,
+.footer-container .footer-block .footer-block-content .links-contact li:hover:before,
+.block .block-title:before,
+.toolbar .modes .modes-mode.mode-grid:hover,
+.toolbar .modes .modes-mode.mode-grid.active,
+.toolbar .modes .modes-mode.mode-list:hover,
+.toolbar .modes .modes-mode.mode-list.active,
+button:hover,
+.cart-container .action.continue:hover,
+a.action.primary:hover,
+.products-grid .item .item-inner .box-info .bottom-action .btn-action.btn-cart:hover,
+.products-list .item .item-inner .box-info-list .bottom-action form .btn-action:hover,
+.page-title:before,
+.header-style-1 .header-top .header-top-links .toplinks-wrapper .header.links li a:hover,
+.header-style-1 .header-middle .middle-right-content .searchbox-header .search-wrapper .block-content .btn-search-header:hover,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li.open,
+/*.sm-imageslider .owl-controls .owl-nav div:hover,*/
+.title-home-page:before,
+.detail-title:before,
+.sm-listing-tabs .ltabs-items .ltabs-loadmore .ltabs-loadmore-btn,
+.info-box-detail .product-options-bottom .box-tocart .fieldset .actions button,
+.info-box-detail .product-add-form .box-tocart .fieldset .actions button,
+.control-qty .quantity-controls:hover,
+.resp-vtabs .resp-tabs-list li.resp-tab-active:before,
+.block-subscribe-home .form.subscribe button.subscribe,
+.header-style-2 .header-top .header-top-links .toplinks-wrapper .header.links li a:hover,
+.header-style-3 .header-top .header-top-links .toplinks-wrapper .header.links li a:hover,
+.sambar-inner:before,
+.header-style-2 .header-middle .sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu > li:hover > .sm_megamenu_head,
+.header-style-3 .header-bottom .sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu > li:hover > .sm_megamenu_head,
+.header-style-4 .header-bottom .minicart-header .minicart-content .cart-wrapper .minicart-wrapper .showcart,
+.header-style-4 .header-middle .middle-right-content .currency-wrapper .switcher-options .switcher-trigger.active strong,
+.header-style-4 .header-middle .middle-right-content .language-wrapper .switcher-options .switcher-trigger.active strong,
+.header-style-4 .header-middle .middle-right-content .compare-header-wrapper .item.link.compare .action.compare:hover,
+.slider-ourmember .owl-dots .owl-dot:hover,
+.slider-ourmember .owl-dots .owl-dot.active,
+.navigation-wrapper .navigation ul > li:hover > a,
+.navigation-wrapper .navigation > ul::before,
+.sm-categories .cat-wrap .image-cat .btn-categories,
+.sm-listing-tabs .owl-controls .owl-nav div:hover,
+.modal-footer .action-primary.action-accept:hover,
+.cart-container .cart-summary .coupon .actions-toolbar .primary .apply.primary:hover{
+	background-color: <?php echo $theme_color;?>;
+}
+
+.toolbar .pages .pages-items .item:hover,
+.toolbar .pages .pages-items .item.current,
+.fotorama__nav-wrap--horizontal .fotorama__thumb__arr--right:hover,
+.fotorama__nav-wrap--horizontal .fotorama__thumb__arr--left:hover,
+.sm_quickview_handler:hover{
+	background-color: <?php echo $theme_color;?>;
+	border-color: <?php echo $theme_color;?>;
+}
+
+.products-grid .item .item-inner .box-info .bottom-action .btn-action.btn-cart:hover,
+.products-grid .item .item-inner .box-info .bottom-action .btn-action.link-wishlist:hover,
+.products-grid .item .item-inner .box-info .bottom-action .btn-action.link-compare:hover,
+.products-list .item .item-inner .box-info-list .bottom-action form .btn-action:hover,
+.products-list .item .item-inner .box-info-list .bottom-action .btn-action.link-wishlist:hover,
+.products-list .item .item-inner .box-info-list .bottom-action .btn-action.link-compare:hover,
+.breadcrumbs .items > li:hover,
+.breadcrumbs .items > li:hover:after,
+.breadcrumbs .items > li:hover:before,
+.sm-listing-tabs .owl-controls .owl-nav div:hover,
+.info-box-detail .product-social-links .action:hover,
+.related-wrapper .owl-controls .owl-nav div:hover,
+.upsell-wrapper .owl-controls .owl-nav div:hover,
+.clients-say .block-content-clients-say .owl-controls .owl-nav div:hover,
+.home-page-3 .services-home .banner-policy .inner .policy a:hover,
+.home-page-4 .services-home .banner-policy .inner .policy a:hover,
+.products-sidebar .item .item-inner .box-image:hover{
+	border-color: <?php echo $theme_color;?>!important;
+}
+
+.sm-listing-tabs .ltabs-tabs-container .ltabs-tabs li.tab-sel{
+	border-top: 2px solid <?php echo $theme_color;?>;
+}
+
+.collections .collect a{
+	border-bottom: 2px solid <?php echo $theme_color;?>;
+}
+
+.collections .collect a:hover,
+.fotorama-item .fotorama__nav--thumbs .fotorama__nav__frame.fotorama__active{
+	border-color: <?php echo $theme_color;?>;
+}
+
+/* BONUS PAGE */
+
+.cart-container .cart.main.actions .action,
+.cart-container .cart.table-wrapper .actions-toolbar .action-edit:hover,
+.cart-container .cart.table-wrapper .actions-toolbar .action-delete:hover{
+	background-color: <?php echo $theme_color;?>;
+}
+
+.cart-container .checkout-methods-items .action.primary.checkout{
+	background-color: <?php echo $theme_color;?>!important;
+}
+
+/* ICON IMAGE */
+.products-grid .item .item-inner .box-info .bottom-action .btn-action.link-wishlist,
+.products-grid .item .item-inner .box-info .bottom-action .btn-action.link-compare,
+.products-list .item .item-inner .box-info-list .bottom-action .btn-action.link-wishlist,
+.products-list .item .item-inner .box-info-list .bottom-action .btn-action.link-compare,
+.header-style-1 .header-middle .middle-right-content .minicart-header .minicart-content .cart-wrapper .minicart-wrapper .showcart:before,
+.header-style-2 .header-middle .middle-right-content .minicart-header .minicart-content .cart-wrapper .minicart-wrapper .showcart:before,
+.header-style-3 .header-middle .middle-right-content .minicart-header .minicart-content .cart-wrapper .minicart-wrapper .showcart:before,
+.home-page-1 .services-home .banner-policy .inner .policy a .ico-policy,
+.home-page-3 .services-home .banner-policy .inner .policy a .ico-policy,
+.home-page-4 .services-home .banner-policy .inner .policy a .ico-policy,
+.info-box-detail .product-social-links .action,
+.info-box-detail .product-social-links .action:hover,
+.services-detail .banner-policy .inner .policy a .ico-policy{
+	background-image: url("<?php echo $img_path;?>icon-image.png");
+}
+
+@media (min-width: 1200px) {
+	.header-style-1 .header-top .header-top-links .toplinks-wrapper .header.links li.myaccount-link a{
+		background-color: <?php echo $theme_color;?>;
+	}
+}
+
+</style>

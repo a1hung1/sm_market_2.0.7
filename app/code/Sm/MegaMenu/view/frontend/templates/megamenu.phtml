@@ -1,0 +1,168 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Vu Van Phan
+ * Date: 07-12-2015
+ * Time: 17:51
+ */
+
+use \Sm\MegaMenu\view\frontend\templates\MobileDetect;
+$detect = new MobileDetect();
+
+$_config = $this->helper('Sm\Market\Helper\Data');
+$headerStyle = $_config->getThemeLayout('header_style');
+
+
+$prefix = \Sm\MegaMenu\Model\Config\Source\Html::PREFIX;
+$menuItems = $this->createMenuItems();
+$itemsStartLv = $this->getItems();
+$uq = uniqid($prefix.'menu');
+$nametable = $this->nameTable();
+$config = $this->getConfigObject();
+
+if($config['theme'] == \Sm\MegaMenu\Model\Config\Source\ListTheme::HORIZONTAL){
+	$theme = 'horizontal';
+}
+if($config['theme'] == \Sm\MegaMenu\Model\Config\Source\ListTheme::VERTICAL){
+	$theme = 'vertical';
+}
+$instance = rand().time();
+?>
+<?php if(count($itemsStartLv)): ?>
+	<?php include_once dirname(__FILE__) . '/js/add_js_by_effect.phtml'; ?>
+
+	<nav class="<?php echo $prefix; ?>wrapper_<?php echo $theme?>_menu sambar" id="<?php echo $uq; ?>" data-sam="<?php echo $instance; ?>">
+		<div class="sambar-inner">
+			<ul class="<?php if ( !$detect->isMobile() && !$detect->isTablet() ) { echo "sm-megamenu-hover";}?> <?php echo $prefix; ?>menu <?php echo $prefix; ?>menu_black" data-jsapi="on">
+				<?php 	foreach($itemsStartLv as $itemStartLv){ ?>
+					<li class="<?php if($itemStartLv['custom_class']){ echo $itemStartLv['custom_class'].'-parent ';}?><?php if( $config['effect'] == 1 || $config['effect'] == 2 ){ echo 'other-toggle ';}?>
+							<?php echo $prefix; ?>lv1 <?php echo (!$this->isLeaf($itemStartLv) OR ($this->isLeaf($itemStartLv) AND $this->hasConntentType($itemStartLv)))?$prefix.'drop parent':$prefix.'nodrop'?>  <?php echo ($this->isAlignRight($itemStartLv))?$prefix.'right':''?>">
+						<a class="<?php echo $prefix; ?>head <?php echo (!$this->isLeaf($itemStartLv) OR ($this->isLeaf($itemStartLv) AND $this->hasConntentType($itemStartLv)))?$prefix.'drop':$prefix.'nodrop'?> <?php if($menuItems->getAllItemsByItemsId($itemStartLv['items_id'], $itemStartLv['group_id']) || ($itemStartLv['type'] == 7)){ echo $prefix.'haschild'; } ?>" href="<?php echo ($this->hasLinkType($itemStartLv))?$this->getLinkOfType($itemStartLv):'javascript:void(0)'?>" <?php echo ($this->hasLinkType($itemStartLv))?$this->getTargetAttr($itemStartLv['target']):'' ?> id="<?php echo $prefix.$itemStartLv['items_id']; ?>">
+							<?php if($this->hasIcon($itemStartLv)) {	?>
+							<span class="icon_items"><img src='<?php echo $this->filterImage($itemStartLv); ?>' alt="icon items"></span>
+								<span class="<?php echo $prefix; ?>icon <?php if(!$itemStartLv['description']){echo $prefix.'nodesc';}?>">
+														<?php }else{	?>
+									<span class="<?php echo $prefix; ?>icon <?php if(!$itemStartLv['description']){echo $prefix.'nodesc';}?>">
+														<?php } ?>
+										<span class="<?php echo $prefix; ?>title"><?php echo $itemStartLv['title'] ?></span>
+										<?php if($itemStartLv['description']):?>
+											<span class="<?php echo $prefix; ?>description"><?php echo $itemStartLv['description'] ?>&nbsp;</span>
+										<?php endif?>
+									</span>
+						</a>
+						<?php $childItems = $menuItems->getAllItemsInEqLv($itemStartLv, 1); ?>
+						<?php 	if($this->isLeaf($itemStartLv) OR !count($childItems)){ 	?>
+							<?php 	if($this->hasConntentType($itemStartLv)){	?>
+								<div class="<?php echo $prefix; ?>dropdown_<?php echo $itemStartLv['cols_nb'] ?><?php if($itemStartLv['cols_nb']>1){ ?>columns<?php }else{ ?>column<?php } ?> <?php echo ($this->isAlignRight($itemStartLv))?$prefix.'align_right':''?>">
+									<?php if($itemStartLv['show_title'] == \Sm\MegaMenu\Model\Config\Source\Status::STATUS_ENABLED){	?>
+										<div class="<?php echo $prefix; ?>title"><span><?php echo $itemStartLv['title'] ?></span></div>
+									<?php } ?>
+									<div class="<?php echo $prefix; ?>content"><?php echo $this->getContentType($itemStartLv) ?></div>
+								</div>
+							<?php 	}
+							continue;
+						}
+						if($itemStartLv['cols_nb']>1){
+							$divClassName = 'sm-megamenu-child ' .$prefix.'dropdown_'.$itemStartLv['cols_nb'].'columns ';
+						}
+						else{
+							$divClassName = $prefix.'dropdown_'.$itemStartLv['cols_nb'].'column ';
+						}
+						if($this->isAlignRight($itemStartLv)){
+							$divClassName .= $prefix.'align_right';
+						}
+
+						if($itemStartLv['depth']+1 <= $config['end_level']){
+							if(count($childItems) > 0)
+							{
+								?>
+								<div class="<?php echo $divClassName?>">
+									<?php echo $this->getItemHtml($itemStartLv, true);	 ?>
+								</div>
+							<?php }
+						} ?>
+					</li>
+				<?php } ?>
+			</ul>
+		</div>
+	</nav>
+<?php else: ?>
+	<p class="note-msg"><?php echo $this->__('There are no items matching the selection.') ?></p>
+<?php endif; ?>
+
+<script type="text/javascript">
+	require(["jquery","mage/template"], function() {
+		// <![CDATA[
+		jQuery(document).ready(function ($) {
+			$('.sm_megamenu_menu > li > .sm-megamenu-child').parent().addClass('parent-item');
+			
+			var menu_width = $('.sm_megamenu_wrapper_horizontal_menu').width();
+			$('.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu > li > div').each(function () {
+				$this = $(this);
+				var lv2w = $this.width();
+				var lv2ps = $this.position();
+				var lv2psl = $this.position().left;
+				var sw = lv2w + lv2psl;
+				if (sw > menu_width) {
+					$this.css({'left': '0'});
+				}
+			});
+		});
+		// ]]>
+	});
+</script>
+
+<script type="text/javascript">
+	jQuery('document').ready(function($){
+		var limit;
+		limit = 13;
+		<?php if($headerStyle == 2){?>
+			limit = 9;
+		<?php } ?>
+		
+		var i;
+		i=0;
+		var items;
+		items = $('.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu > li').length;
+		//alert(items);
+		
+		if(items > limit){
+			$('.sm_megamenu_wrapper_vertical_menu .sambar-inner').append('<div class="more-w"><span class="more-view">More Categories</span></div>');
+			
+			$('.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu > li').each(function(){
+				i++;
+				if( i > limit ){
+					$(this).css('display', 'none');
+				}
+			});
+			
+			$('.sm_megamenu_wrapper_vertical_menu .sambar-inner .more-w > .more-view').click(function(){
+				if($(this).hasClass('open')){
+					i=0;
+					$('.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu > li').each(function(){
+						i++;
+						if(i>limit){
+							$(this).slideUp(200);
+						}
+					});
+					$(this).removeClass('open');
+					$('.more-w').removeClass('active-i');
+					$(this).text('More Categories');
+				}else{
+					i=0;
+					$('.sm_megamenu_wrapper_vertical_menu ul.sm_megamenu_menu > li').each(function(){
+						i++;
+						if(i>limit){
+							$(this).slideDown(200);
+						}
+					});
+					$(this).addClass('open');
+					$('.more-w').addClass('active-i');
+					$(this).text('Close Menu');
+				}
+			});
+
+		}
+
+	});
+</script>
